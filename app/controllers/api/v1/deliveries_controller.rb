@@ -17,6 +17,11 @@ module Api
         render json: ::DeliverySerializer.new(delivery, include: [:drugs]).serializable_hash.to_json
       end
 
+      def destroy
+        delivery = current_user.deliveries.preparing_to_deliver.find(params[:id])
+        delivery.destroy
+      end
+
       def update
         delivery = Delivery.find(params[:id])
         delivery.update(delivery_status: params[:status].to_sym)

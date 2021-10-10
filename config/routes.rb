@@ -9,7 +9,7 @@ Rails.application.routes.draw do
           get :me
         end
       end
-      resources :deliveries, only: %i[create index show update] do
+      resources :deliveries do
         post :damage, on: :member
         get :search, on: :collection
       end
