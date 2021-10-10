@@ -1,0 +1,6 @@
+uk:
+  api:
+    errors:
+      not_found: 'Запис не знайдено'
+      not_unique: 'Запис вже існує'
+      missing_parameters: 'У запиті відсутні необхідні параметри'

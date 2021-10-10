@@ -1,0 +1,8 @@
+uk:
+  services:
+    user_sessions:
+      create_service:
+        unauthorized: 'Невірна пошта або пароль'
+    auth:
+      fetch_user_service:
+        forbidden: 'Доступ до ресурсу обмежений'

@@ -1,0 +1,944 @@
+  [1m[35m (13.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS `health_delivery_backend_test`[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE `health_delivery_backend_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (4.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `user_sessions` CASCADE[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE `user_sessions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `uuid` varchar(36) NOT NULL, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_user_sessions_on_user_id` (`user_id`), INDEX `index_user_sessions_on_uuid` (`uuid`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `first_name` varchar(255) NOT NULL, `last_name` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password_digest` varchar(255) NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (12.9ms)[0m  [1m[35mALTER TABLE `user_sessions` ADD CONSTRAINT `fk_rails_9fa262d742`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (4.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20210924134236)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20210924133314);
+
+[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2021-09-24 15:05:10.185083', '2021-09-24 15:05:10.185083')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '2231c5cbd1b1ac8b5473cc42a62345e480166d84', '2021-09-24 15:05:10.188584', '2021-09-24 15:05:10.188584')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:05:11 +0300
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:06:00 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Otto", "last_name"=>"Hoeger", "email"=>"zoraida@schroeder.name", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameters: :first_name, :last_name[0m
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.0ms | Allocations: 6757)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:06:54 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Indira", "last_name"=>"Mayert", "email"=>"salvatore.murazik@schmeler.io", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 5699)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:08:08 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Samual", "last_name"=>"Weissnat", "email"=>"agripina@kertzmann.biz", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+Completed 500 Internal Server Error in 687199ms (ActiveRecord: 0.0ms | Allocations: 25111)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:20:01 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Darrel", "last_name"=>"Waelchi", "email"=>"somer.ohara@pollich.co", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameters: :first_name, :last_name[0m
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 4453)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:20:06 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"user"=>{"first_name"=>"Tim", "last_name"=>"Lang", "email"=>"buddy.towne@ortiz-langosh.biz", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+[31mUnpermitted parameter: :user[0m
+[31mUnpermitted parameters: :first_name, :last_name[0m
+Completed 500 Internal Server Error in 197164ms (ActiveRecord: 0.0ms | Allocations: 41590)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:24:04 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Vincenzo", "last_name"=>"Hills", "email"=>"janay_maggio@bogan.org", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 5ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 4637)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:24:33 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Shaun", "last_name"=>"Beier", "email"=>"jacqulyn@lynch.com", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 5ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 4505)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:24:50 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Ty", "last_name"=>"Schneider", "email"=>"van@maggio.biz", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 4ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 4505)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:26:08 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Tosha", "last_name"=>"Powlowski", "email"=>"cedrick_morissette@harber.name", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 5ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 4505)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:26:29 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Mariette", "last_name"=>"Luettgen", "email"=>"nancy@kutch.com", "password"=>"[FILTERED]"}
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.9ms | Allocations: 10737)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:26:58 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Roman", "last_name"=>"Leuschke", "email"=>"merrill_gerlach@kling.net", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Roman', 'Leuschke', 'merrill_gerlach@kling.net', '$2a$04$EmfDgwe2igxRze04goL1P.D3cb2VgENdieizDVCyBjdN.UoDE0.mW', '2021-09-24 15:26:58.042689', '2021-09-24 15:26:58.042689')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 13ms (ActiveRecord: 2.3ms | Allocations: 11281)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:27:28 +0300
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:30:59 +0300
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:31:12 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Bo", "last_name"=>"Bartoletti", "email"=>"dona@kautzer.name", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Bo', 'Bartoletti', 'dona@kautzer.name', '$2a$04$U9lsrR0rwTQXZqzkhDjIWuKMLiX9RSofgbmiKofHvn3EtYbNlCyhC', '2021-09-24 15:31:12.636436', '2021-09-24 15:31:12.636436')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 15ms (ActiveRecord: 2.5ms | Allocations: 11201)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:35:19 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Benton", "last_name"=>"Von", "email"=>"andree@turcotte-pfeffer.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Benton', 'Von', 'andree@turcotte-pfeffer.info', '$2a$04$/LrDVzL28YhF/ilgUh6NfOi7Yq/A51Iu2VuEM2qjNx9HUa9SbOK/6', '2021-09-24 15:35:19.940094', '2021-09-24 15:35:19.940094')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 14ms (ActiveRecord: 2.2ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:36:56 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Tammera", "last_name"=>"Robel", "email"=>"karole@mayer-douglas.com", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Tammera', 'Robel', 'karole@mayer-douglas.com', '$2a$04$I7pwT.XjpuVccfmdkq.r4.y645Sna941rak1QokLtToM92q9sTnX6', '2021-09-24 15:36:56.972370', '2021-09-24 15:36:56.972370')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 15ms (ActiveRecord: 2.1ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:38:19 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Jerrell", "last_name"=>"Cummerata", "email"=>"titus.dickinson@green.co", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Jerrell', 'Cummerata', 'titus.dickinson@green.co', '$2a$04$7ogRpVQQ/ower3M0zYLweu0WZcfxalhQBeBNdcmnK4J/I301lt3uO', '2021-09-24 15:38:20.009929', '2021-09-24 15:38:20.009929')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 13ms (ActiveRecord: 1.8ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Wendell', 'Stehr', 'renetta@deckow.co', '$2a$04$mog/Ryk91prZVbhg7zpheeb5uqdnO080mtjE92QArtz3p2vlJs4I6', '2021-09-24 15:38:20.020543', '2021-09-24 15:38:20.020543')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:38:20 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Kris", "last_name"=>"Hettinger", "email"=>"renetta@deckow.co", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Kris', 'Hettinger', 'renetta@deckow.co', '$2a$04$rGaimG4hH1RwFO.J4GSHburkfD4FJLcKP9zwbjcb5RItCcQA/hsAS', '2021-09-24 15:38:20.034554', '2021-09-24 15:38:20.034554')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.8ms | Allocations: 915)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:38:50 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Rosy", "last_name"=>"Schmidt", "email"=>"drew@oconner-hermiston.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Rosy', 'Schmidt', 'drew@oconner-hermiston.info', '$2a$04$aR0tLaCq9u1kifM2Laa5K.56bQnq6ykiZckWoPFLBYecXlSa4BOZW', '2021-09-24 15:38:50.512781', '2021-09-24 15:38:50.512781')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 16ms (ActiveRecord: 2.2ms | Allocations: 11202)
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Thaddeus', 'Goldner', 'gerri@marks.info', '$2a$04$MTQMzQQZXJLnMOa19zU7COoOb9a1AyYwtpPhWxRDlwQHya/B0cevG', '2021-09-24 15:39:56.517716', '2021-09-24 15:39:56.517716')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:39:56 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Tinisha", "last_name"=>"Hand", "email"=>"gerri@marks.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Tinisha', 'Hand', 'gerri@marks.info', '$2a$04$SLSAhGl7ElvPMDgft5G9p.qzMoH1XMnsScBfzvbAx3zW6Qf9EkZC.', '2021-09-24 15:39:56.535408', '2021-09-24 15:39:56.535408')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 5ms (Views: 0.4ms | ActiveRecord: 1.0ms | Allocations: 913)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:40:20 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Apolonia", "last_name"=>"Reichel", "email"=>"sierra@aufderhar-schimmel.com", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Apolonia', 'Reichel', 'sierra@aufderhar-schimmel.com', '$2a$04$8/W7ROLZBPjFKojP8LA0E.EyZz90wYFJssoMzJZ7A40Y/G7RfTO2e', '2021-09-24 15:40:20.592134', '2021-09-24 15:40:20.592134')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 15ms (ActiveRecord: 2.0ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Ha', 'Lakin', 'young_mcclure@grimes.info', '$2a$04$.FL/GHbke6hoTfYexCLCb.UjHwbkyU0jjZwbjzwLXQvWLOt/N1nZ.', '2021-09-24 15:40:20.599678', '2021-09-24 15:40:20.599678')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:40:20 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Celena", "last_name"=>"Kling", "email"=>"young_mcclure@grimes.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Celena', 'Kling', 'young_mcclure@grimes.info', '$2a$04$SWuG2zxTjc/fbVkjBacmdebNJZqelgX8DZZWRb0BxbaC7A4VhhNta', '2021-09-24 15:40:20.612751', '2021-09-24 15:40:20.612751')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 917)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:40:31 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Pierre", "last_name"=>"Prosacco", "email"=>"rashad@rice-miller.biz", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Pierre', 'Prosacco', 'rashad@rice-miller.biz', '$2a$04$U14WzVrb.YZI5yniY78RFuknnZWTBAzhyzE0z4XAYJnJa.4Y.G/yu', '2021-09-24 15:40:31.106701', '2021-09-24 15:40:31.106701')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 15ms (ActiveRecord: 2.1ms | Allocations: 11201)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Forrest', 'Kuphal', 'ivan.lowe@friesen-wilkinson.biz', '$2a$04$JACxGyB0x0hbaB0AF5e/DeNm25.6wTNkTUhsbYf4J5MGHwue78llW', '2021-09-24 15:40:31.113956', '2021-09-24 15:40:31.113956')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:40:31 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Jerome", "last_name"=>"Mraz", "email"=>"ivan.lowe@friesen-wilkinson.biz", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Jerome', 'Mraz', 'ivan.lowe@friesen-wilkinson.biz', '$2a$04$c.r7GsnYYQwC6Su/3hgB1eYnJfzklV5Qi5jqQb.TqsoYxmBJbBspC', '2021-09-24 15:40:31.127197', '2021-09-24 15:40:31.127197')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 917)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:41:24 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Else", "last_name"=>"Hane", "email"=>"federico.beatty@wunsch.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Else', 'Hane', 'federico.beatty@wunsch.info', '$2a$04$7mMCxRlkPMBRYIfUWL69suHZefEnEQlB1LRCc3HVX4mDfVW9qAGt.', '2021-09-24 15:41:24.026106', '2021-09-24 15:41:24.026106')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 13ms (ActiveRecord: 2.0ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Lowell', 'Hahn', 'don@langosh-mraz.co', '$2a$04$jFCIspM1Q/MH/jgIm84K8uOPahSiwhloIFmXmGSb0umMy7mXZfoji', '2021-09-24 15:41:24.032996', '2021-09-24 15:41:24.032996')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:41:24 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Neal", "last_name"=>"Wintheiser", "email"=>"don@langosh-mraz.co", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Neal', 'Wintheiser', 'don@langosh-mraz.co', '$2a$04$u/2my4068wptI8VQeVIlm.TT9La8AE5aHayvno6d5DD5TlVXa8sES', '2021-09-24 15:41:24.046456', '2021-09-24 15:41:24.046456')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 916)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Truman', 'Hayes', 'kari.nader@huel.net', '$2a$04$F.jfZNqGCTvix4YJYubtGuAWRRiaeQKH2mLYaCuK49Wn41jfcXl4S', '2021-09-24 15:41:24.053513', '2021-09-24 15:41:24.053513')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:41:24 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Fe", "last_name"=>"Torphy", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 146)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:41:34 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Johnathan", "last_name"=>"Powlowski", "email"=>"arnoldo.heller@treutel.io", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Johnathan', 'Powlowski', 'arnoldo.heller@treutel.io', '$2a$04$CUPhiH/fr3lxKgn4RLMkduZGOPBo5ooyBrv0o67e44c8Q9oZVdw1i', '2021-09-24 15:41:34.110548', '2021-09-24 15:41:34.110548')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 14ms (ActiveRecord: 1.8ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Vincent', 'Halvorson', 'sang_harris@abbott.info', '$2a$04$Z2ok6xSn90bUIqcwzRSz5eOv2f4GPfDhA77VQTKw1p5vkMx6NHBaW', '2021-09-24 15:41:34.118803', '2021-09-24 15:41:34.118803')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:41:34 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Hassan", "last_name"=>"Grady", "email"=>"sang_harris@abbott.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Hassan', 'Grady', 'sang_harris@abbott.info', '$2a$04$9krda3A48NRuL8zXPt5LlOZ7A0p8A2qod8du48UWydhtPPARelr6q', '2021-09-24 15:41:34.133264', '2021-09-24 15:41:34.133264')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 916)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Wyatt', 'Pacocha', 'leatrice@marquardt.info', '$2a$04$vdGA3uKx65QKrp9c7yyXTeyRw4y01isKU12WhrXge7hLVBE8Svtnu', '2021-09-24 15:41:34.141322', '2021-09-24 15:41:34.141322')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:41:34 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Laurice", "last_name"=>"Boehm", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 146)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:43:15 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Alex", "last_name"=>"Pollich", "email"=>"mariel.mcdermott@deckow-schneider.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Alex', 'Pollich', 'mariel.mcdermott@deckow-schneider.info', '$2a$04$D7FS7BHUKYmCWJGSMiBpu.cKfORVu.mSAixeOhkjjKwbat0/0ogu6', '2021-09-24 15:43:15.105570', '2021-09-24 15:43:15.105570')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 16ms (ActiveRecord: 2.1ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Bong', 'Langworth', 'nu.wisozk@cole.name', '$2a$04$dycf/OOSYx.lBRlXWwZ1QOhL/dSPsflTUWn.Ijs4wE61FCsZAvonW', '2021-09-24 15:43:15.113468', '2021-09-24 15:43:15.113468')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:43:15 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Alexis", "last_name"=>"Barrows", "email"=>"nu.wisozk@cole.name", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Alexis', 'Barrows', 'nu.wisozk@cole.name', '$2a$04$ES0NelCQhQ4ltOzfKivvLOlHfuyIgAievv6B7v0Tf5IJwfu84WgFm', '2021-09-24 15:43:15.126387', '2021-09-24 15:43:15.126387')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 916)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Amanda', 'Wiza', 'zack_little@schmitt-nikolaus.io', '$2a$04$g5iLM9Pd.a4RtBANZPZzuO0TbUSA1.U/3jg340hnI12Tbkc8zJp6W', '2021-09-24 15:43:15.133480', '2021-09-24 15:43:15.133480')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:43:15 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Lisandra", "last_name"=>"Rodriguez", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 146)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:44:56 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Alvina", "last_name"=>"Orn", "email"=>"ethan_towne@ankunding-roob.co", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Alvina', 'Orn', 'ethan_towne@ankunding-roob.co', '$2a$04$1l0y/j2jzq1oGOEHzFBwyeeLrRO7IqO66ZLCpOBK4O..RGABgJWim', '2021-09-24 15:44:57.012305', '2021-09-24 15:44:57.012305')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 15ms (ActiveRecord: 1.9ms | Allocations: 11202)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Delois', 'Rutherford', 'janessa@champlin-considine.biz', '$2a$04$lfwzQHoBOT/MvCSCUKymVuNeWdWGOyMNsT3h4af9VJnMtNLAgDXGu', '2021-09-24 15:44:57.019079', '2021-09-24 15:44:57.019079')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:44:57 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Alane", "last_name"=>"Deckow", "email"=>"janessa@champlin-considine.biz", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Alane', 'Deckow', 'janessa@champlin-considine.biz', '$2a$04$VDBeyfULpDD28KRzMFJX8OSqOVn54znmePF5OgGLiyDZRPnl9UMSe', '2021-09-24 15:44:57.032543', '2021-09-24 15:44:57.032543')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 920)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Krista', 'Herman', 'adolfo.kovacek@bosco.org', '$2a$04$F5tZoNYDGN9gS53j1J1hruEs6z3gl4DbbEIQyHmgPNHngoR9qJkVe', '2021-09-24 15:44:57.039292', '2021-09-24 15:44:57.039292')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-24 18:44:57 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Juliane", "last_name"=>"Ondricka", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 146)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Mellisa', 'Nader', 'lanie_berge@hand.com', '$2a$04$39Ed0k4u/Aoq2uABioZN9e0SYNZDrrEjVxvH9XehdPOH.ups0Jh7W', '2021-09-24 16:33:47.797767', '2021-09-24 16:33:47.797767')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sing_in" for 127.0.0.1 at 2021-09-24 19:33:47 +0300
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Mallie', 'Maggio', 'darcie_reichel@mueller.co', '$2a$04$4S4ffq.L14zd8oygZ03P1.DEojQVd2PZkf0UW1nAYn/R3SFDAPbkm', '2021-09-24 16:37:03.838323', '2021-09-24 16:37:03.838323')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 19:37:03 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"darcie_reichel@mueller.co", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'darcie_reichel@mueller.co' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.5ms)[0m  [1m[32mINSERT INTO `user_sessions` (`user_id`, `created_at`, `updated_at`) VALUES (34, '2021-09-24 16:37:03.885122', '2021-09-24 16:37:03.885122')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 2.6ms | Allocations: 13095)
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Letha', 'Schoen', 'lupe@carroll.org', '$2a$04$YP7GkBFZAbqUCSu6WhGcD.zwp7CfVbUszgKQ6hVAkCjWH1ss3Wf6S', '2021-09-24 16:39:47.479376', '2021-09-24 16:39:47.479376')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 19:39:47 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"lupe@carroll.org", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'lupe@carroll.org' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.5ms)[0m  [1m[32mINSERT INTO `user_sessions` (`user_id`, `created_at`, `updated_at`) VALUES (35, '2021-09-24 16:39:47.510349', '2021-09-24 16:39:47.510349')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 2.3ms | Allocations: 10139)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Betsey', 'Schimmel', 'gonzalo.jaskolski@kuhn.net', '$2a$04$9sf4K9QF5X5S77BiKsK1JugCkjU1v.YnmvmdnWfKIoIcl6aoyG8sW', '2021-09-24 16:41:58.815583', '2021-09-24 16:41:58.815583')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 19:41:58 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"gonzalo.jaskolski@kuhn.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'gonzalo.jaskolski@kuhn.net' LIMIT 1[0m
+Completed 401 Unauthorized in 20ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 12466)
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Tyrell', 'Rolfson', 'damon@koelpin.biz', '$2a$04$czt7bA9DyQ/RB6VrerAS.uA1seYXmgqltFc9kEyQewZzK5E1Qvlc.', '2021-09-24 16:48:28.484840', '2021-09-24 16:48:28.484840')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 19:48:28 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"damon@koelpin.biz", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'damon@koelpin.biz' LIMIT 1[0m
+Completed 401 Unauthorized in 13ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 11651)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Jule', 'Beier', 'karlene@kshlerin-mueller.org', '$2a$04$7PpjdWWSKLou9g4QpxH6H.7BQz8nF9EVIiVI74xm9BWykwi98rfwW', '2021-09-24 16:50:50.799624', '2021-09-24 16:50:50.799624')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 19:50:50 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"karlene@kshlerin-mueller.org", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'karlene@kshlerin-mueller.org' LIMIT 1[0m
+Completed 401 Unauthorized in 16ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 11745)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Jerome', 'Volkman', 'dwayne@leannon.info', '$2a$04$IAqUe5qAaPT7BtNSKMT9C.Bd1lNzSuwp4UcMFiUSz7cd201qIapx6', '2021-09-24 17:24:32.687199', '2021-09-24 17:24:32.687199')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 20:24:32 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"dwayne@leannon.info", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'dwayne@leannon.info' LIMIT 1[0m
+Completed 401 Unauthorized in 26ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 11683)
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Ezequiel', 'Runte', 'rocco@kutch-cassin.net', '$2a$04$ma7fZBWW6zxAo9xXwVpR7ez6wvCeN6BRPFG2TwmuWmiC9BBzKzQ5K', '2021-09-24 17:25:42.890758', '2021-09-24 17:25:42.890758')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 20:25:42 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"rocco@kutch-cassin.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'rocco@kutch-cassin.net' LIMIT 1[0m
+Completed 401 Unauthorized in 17ms (Views: 0.2ms | ActiveRecord: 1.8ms | Allocations: 11745)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Lucio', 'Rowe', 'dorris_hahn@lockman-rosenbaum.net', '$2a$04$9l2s/sfCrB3VpBkJqOhsw.H/A1eprCTi6/CgJbDFUjqe54P8Db8w2', '2021-09-24 17:26:31.242728', '2021-09-24 17:26:31.242728')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 20:26:31 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"dorris_hahn@lockman-rosenbaum.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'dorris_hahn@lockman-rosenbaum.net' LIMIT 1[0m
+Completed 401 Unauthorized in 17ms (Views: 0.2ms | ActiveRecord: 1.8ms | Allocations: 11746)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Reginia', 'Hoppe', 'rickie@heller-boyer.com', '$2a$04$YnQ5NnsnHHb55yoSf3.MUORDjcJx4IwYQ8OqAjbIW7uV2PDWqa/b.', '2021-09-24 17:26:46.872447', '2021-09-24 17:26:46.872447')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 20:26:46 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"rickie@heller-boyer.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'rickie@heller-boyer.com' LIMIT 1[0m
+Completed 401 Unauthorized in 18ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 11751)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Kristy', 'Rath', 'jasper@keeling.net', '$2a$04$jjiizscFoBU0.ejFlqi1fugHf5.94axwMU6P9hrOkPdZus4jf/Qf.', '2021-09-24 17:27:43.827283', '2021-09-24 17:27:43.827283')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 20:27:43 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"jasper@keeling.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'jasper@keeling.net' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.3ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('fed2c728-9269-44f1-b58c-a01472ce127e', 43, '2021-09-24 17:27:43.855172', '2021-09-24 17:27:43.855172')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 16ms (Views: 0.1ms | ActiveRecord: 1.9ms | Allocations: 11165)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Mickey', 'Runolfsdottir', 'becki@turner-mcdermott.biz', '$2a$04$qz2Dlgm8lqyH01R0BoW7EO4qCKrdTHSGisM2/4Ug4gJKX1eYE5nsW', '2021-09-24 17:28:10.288834', '2021-09-24 17:28:10.288834')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 20:28:10 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"becki@turner-mcdermott.biz", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'becki@turner-mcdermott.biz' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.3ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('9f79d914-9624-425e-8fd7-9215bd071c1b', 44, '2021-09-24 17:28:10.316806', '2021-09-24 17:28:10.316806')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 15ms (Views: 0.2ms | ActiveRecord: 2.1ms | Allocations: 11097)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Steve', 'Metz', 'helaine@douglas.biz', '$2a$04$sx30tCZetEY8ACIkNWy/DORExvpSyfN1vQO0bG557Z.7Zy9/dbaGC', '2021-09-24 20:24:22.957102', '2021-09-24 20:24:22.957102')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:24:22 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"helaine@douglas.biz", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'helaine@douglas.biz' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.4ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('d3b96434-1d6d-4b71-b7eb-a84fa5272beb', 45, '2021-09-24 20:24:23.003983', '2021-09-24 20:24:23.003983')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 29ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 11035)
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Pei', 'Paucek', 'treasa.morar@murphy-davis.info', '$2a$04$GaUuITMUWdw1iUoAJISdUuebgnraGaFuBmpyNl2hkVOtNmM26hmIW', '2021-09-24 20:24:23.017711', '2021-09-24 20:24:23.017711')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:24:23 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"treasa.morar@murphy-davis.info", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'treasa.morar@murphy-davis.info' LIMIT 1[0m
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 428)
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Vicente', 'Kilback', 'trevor@hermann.io', '$2a$04$qmEyYyNN5iuh3LRa1w6CbutCIlOQNUf1RsoW8CD9uj75ENFzdRhDG', '2021-09-24 20:25:19.671608', '2021-09-24 20:25:19.671608')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:25:19 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"trevor@hermann.io", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'trevor@hermann.io' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.3ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('1e849699-639e-43dd-8f57-f9f336317546', 47, '2021-09-24 20:25:19.698332', '2021-09-24 20:25:19.698332')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 16ms (Views: 0.3ms | ActiveRecord: 2.3ms | Allocations: 11144)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Josue', 'Metz', 'marivel@hermiston-bernhard.info', '$2a$04$vRrkq4d.Fe8SO6ZJvybR0u4w9WDuHZwpMOSDwD4KpEEvB6vXkatGi', '2021-09-24 20:25:19.707251', '2021-09-24 20:25:19.707251')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:25:19 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"marivel@hermiston-bernhard.info", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'marivel@hermiston-bernhard.info' LIMIT 1[0m
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 383)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Santina', 'Langosh', 'arlinda_purdy@schultz.io', '$2a$04$64dKYjgG6/Cy9aIeBRnWUOjlE7pRtKP6iDZ4.F9ErVTbibqWzjJPO', '2021-09-24 20:29:02.669840', '2021-09-24 20:29:02.669840')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:29:02 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"arlinda_purdy@schultz.io", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'arlinda_purdy@schultz.io' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.2ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('a44e13ac-b91f-4f5e-a0cb-93769d4b31e3', 49, '2021-09-24 20:29:02.695188', '2021-09-24 20:29:02.695188')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 14ms (Views: 0.1ms | ActiveRecord: 2.2ms | Allocations: 11031)
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Wayne', 'Bashirian', 'federico@leannon-oconner.org', '$2a$04$Nxkh7dArYmo8lBDLLuDb7uS3cc7oigHAuex8qpZrArg4LRKcvc7J2', '2021-09-24 20:29:02.708252', '2021-09-24 20:29:02.708252')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:29:02 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"federico@leannon-oconner.org", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'federico@leannon-oconner.org' LIMIT 1[0m
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 383)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Rosalie', 'Pfannerstill', 'merle.bayer@stanton.net', '$2a$04$MS7T4IP47KZUoQvTguoPtOGzGZ27ZH8Ata0f08lnz8MnRlrs960pC', '2021-09-24 20:29:15.755728', '2021-09-24 20:29:15.755728')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:29:15 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"merle.bayer@stanton.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'merle.bayer@stanton.net' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.3ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('d409c603-3be0-48da-885d-c129782a859b', 51, '2021-09-24 20:29:15.786143', '2021-09-24 20:29:15.786143')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 17ms (Views: 0.2ms | ActiveRecord: 2.4ms | Allocations: 11032)
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Jamal', 'Hoeger', 'julius_hickle@stanton.io', '$2a$04$CcBUMafUfihwW8HXeqbs0uuqX4PnwpInn1kDzuVdA8d3Zc00TgK4C', '2021-09-24 20:30:11.589333', '2021-09-24 20:30:11.589333')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:30:11 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"julius_hickle@stanton.io", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'julius_hickle@stanton.io' LIMIT 1[0m
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 381)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Clora', 'Erdman', 'ima@vonrueden-wunsch.com', '$2a$04$dZxSi8xjDxjmzd5RBi2hn.QzzFM.nDVpHxj1zEHNQjshEyx2nCc8G', '2021-09-24 20:30:32.055019', '2021-09-24 20:30:32.055019')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:30:32 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"ima@vonrueden-wunsch.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'ima@vonrueden-wunsch.com' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.2ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('56539a30-7f84-462c-b327-f87c385b2de5', 53, '2021-09-24 20:30:32.081216', '2021-09-24 20:30:32.081216')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 14ms (Views: 0.1ms | ActiveRecord: 2.1ms | Allocations: 11031)
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Marcia', 'Bogan', 'curtis.romaguera@hettinger-stehr.com', '$2a$04$wjRjqXY9g4p9DoJLLYyGOOxn9ITWYiCautgHXB//3I5MzblKwOB9G', '2021-09-24 20:30:32.088049', '2021-09-24 20:30:32.088049')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-24 23:30:32 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"curtis.romaguera@hettinger-stehr.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'curtis.romaguera@hettinger-stehr.com' LIMIT 1[0m
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 383)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Terrell', 'McGlynn', 'nedra@balistreri-kuhn.biz', '$2a$04$ldMr1/jg.3/7bPSrXaVnUuaAvwPnmW66tInKZO8jbDuEdmKNg2Cgy', '2021-09-26 13:48:33.729740', '2021-09-26 13:48:33.729740')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-26 16:48:33 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"nedra@balistreri-kuhn.biz", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'nedra@balistreri-kuhn.biz' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.2ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('22d41380-d06d-4339-8a35-3694fa2a2f00', 55, '2021-09-26 13:48:33.764480', '2021-09-26 13:48:33.764480')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 19ms (Views: 0.2ms | ActiveRecord: 2.9ms | Allocations: 11028)
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Bobby', 'Gerhold', 'melodee.harris@rath-thiel.net', '$2a$04$niW48dJfHL8BWbFNgY/9Z.fOtjw4G2zZ6nPKDFMgAGOnIyxW8.VAm', '2021-09-26 13:48:33.777280', '2021-09-26 13:48:33.777280')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-26 16:48:33 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"melodee.harris@rath-thiel.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'melodee.harris@rath-thiel.net' LIMIT 1[0m
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 392)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-26 16:48:33 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Shad", "last_name"=>"Ritchie", "email"=>"harold@stiedemann-sporer.info", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Shad', 'Ritchie', 'harold@stiedemann-sporer.info', '$2a$04$RSTcSFJUiBgkVE9lIYg2euv/7yn/RNxNtl4Oayf9EBpaGwA1Ji43e', '2021-09-26 13:48:33.805775', '2021-09-26 13:48:33.805775')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 4ms (ActiveRecord: 0.5ms | Allocations: 1674)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Holli', 'Lakin', 'margot_schmeler@macejkovic.name', '$2a$04$5pbU8NCp.70bDx8W/NmzoeCEqA4JghWYsnrFq.3wgkQXjmNtKjze6', '2021-09-26 13:48:33.811633', '2021-09-26 13:48:33.811633')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-26 16:48:33 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Lupe", "last_name"=>"Carroll", "email"=>"margot_schmeler@macejkovic.name", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Lupe', 'Carroll', 'margot_schmeler@macejkovic.name', '$2a$04$OqvvNe.RHz.297OUPYytVuSrx.s4IxKEALQdZinnbvnfqAnl/rvJ.', '2021-09-26 13:48:33.824813', '2021-09-26 13:48:33.824813')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 823)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Bertram', 'Kreiger', 'concepcion.mitchell@sanford.info', '$2a$04$lZ623/IQCjOA45v.oUuJje/08qeqKJcczmPD7MWflyB77C3ckjwte', '2021-09-26 13:48:33.831681', '2021-09-26 13:48:33.831681')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-26 16:48:33 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Joey", "last_name"=>"Bailey", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 169)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (21.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS `health_delivery_backend_test`[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE `health_delivery_backend_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (4.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `user_sessions` CASCADE[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE `user_sessions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `uuid` varchar(36) NOT NULL, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_user_sessions_on_user_id` (`user_id`), INDEX `index_user_sessions_on_uuid` (`uuid`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `first_name` varchar(255) NOT NULL, `last_name` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password_digest` varchar(255) NOT NULL, `admin` tinyint(1) DEFAULT FALSE, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (12.7ms)[0m  [1m[35mALTER TABLE `user_sessions` ADD CONSTRAINT `fk_rails_9fa262d742`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (4.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20210924134236)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20210924133314);
+
+[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2021-09-26 18:18:44.421686', '2021-09-26 18:18:44.421686')[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '81510b2a6b52709fc4782bd10f39993bc89b23e2', '2021-09-26 18:18:44.425378', '2021-09-26 18:18:44.425378')[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Ernie', 'Rice', 'antonio@wuckert.name', '$2a$04$j8V4Xyf8tcecNw5/X9j2Z.6cfRvNzLYbUn4H3DfhDH3kxnj7EhNxK', '2021-09-26 18:18:44.773562', '2021-09-26 18:18:44.773562')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-26 21:18:44 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"antonio@wuckert.name", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'antonio@wuckert.name' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.3ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('2d48dc95-2b14-43f3-ab93-7adccce52bfd', 1, '2021-09-26 18:18:44.817176', '2021-09-26 18:18:44.817176')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 28ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 11033)
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Vanetta', 'Okuneva', 'steve@goodwin.com', '$2a$04$8Gb84UDnr7RDemEom.DSau3CGwZpTRF9XkuJyZA3g97j62oWBzXnW', '2021-09-26 18:18:44.832303', '2021-09-26 18:18:44.832303')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-26 21:18:44 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"steve@goodwin.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'steve@goodwin.com' LIMIT 1[0m
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 413)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-26 21:18:44 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Edmund", "last_name"=>"Donnelly", "email"=>"earlie@lind.com", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Edmund', 'Donnelly', 'earlie@lind.com', '$2a$04$foHN2/u6XOmNFdJbeqdnp.KzI4wIeHwQYqn0x3LKvLMSTObcxpBwa', '2021-09-26 18:18:44.863597', '2021-09-26 18:18:44.863597')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 5ms (ActiveRecord: 0.5ms | Allocations: 1760)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Elvin', 'Ward', 'nakita@predovic.co', '$2a$04$pzihKlcEwYwiSYrML9pRqukByg6y86L0E/Ibp8sScWvxpqyikjsUi', '2021-09-26 18:18:44.869809', '2021-09-26 18:18:44.869809')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-26 21:18:44 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Tatyana", "last_name"=>"Reichert", "email"=>"nakita@predovic.co", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Tatyana', 'Reichert', 'nakita@predovic.co', '$2a$04$3TRudFCrWg2yUOh3Je4En.YBcTSXfpKwW1jH.s3SZ75wrwfsm6tXi', '2021-09-26 18:18:44.883708', '2021-09-26 18:18:44.883708')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 835)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Daniel', 'Cassin', 'ashely@rice.io', '$2a$04$3OhqM7rbG.N2td3FKKXP/Or.BwkyKFU509jwzoKMVTLeuJVX84IAq', '2021-09-26 18:18:44.889827', '2021-09-26 18:18:44.889827')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-26 21:18:44 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Damion", "last_name"=>"Jenkins", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 172)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (15.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS `health_delivery_backend_test`[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE DATABASE `health_delivery_backend_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (4.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `damage_details` CASCADE[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE `damage_details` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `reason` varchar(255), `drug_id` bigint NOT NULL, `lat` decimal(10) NOT NULL, `lon` decimal(10) NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_damage_details_on_drug_id` (`drug_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `deliveries` CASCADE[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE `deliveries` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `route` json NOT NULL, `status` int DEFAULT 0, `ttn` varchar(255) NOT NULL, `estimated_delivery_date` datetime, `name` varchar(255) NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `lat` decimal(10), `lon` decimal(10), INDEX `index_deliveries_on_ttn` (`ttn`), INDEX `index_deliveries_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `drugs` CASCADE[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE `drugs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `delivery_id` bigint NOT NULL, `min_temperature` decimal(10) DEFAULT 0, `min_humidity` decimal(10) DEFAULT 0, `max_temperature` decimal(10) DEFAULT 0, `max_humidity` decimal(10) DEFAULT 0, `name` varchar(255) NOT NULL, `status` int DEFAULT 0, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_drugs_on_delivery_id` (`delivery_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `trackable_deliveries` CASCADE[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE `trackable_deliveries` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `delivery_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_trackable_deliveries_on_delivery_id` (`delivery_id`), INDEX `index_trackable_deliveries_on_user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `user_sessions` CASCADE[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE `user_sessions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `uuid` varchar(36) NOT NULL, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_user_sessions_on_user_id` (`user_id`), INDEX `index_user_sessions_on_uuid` (`uuid`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `first_name` varchar(255) NOT NULL, `last_name` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password_digest` varchar(255) NOT NULL, `admin` tinyint(1) DEFAULT FALSE, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, UNIQUE INDEX `index_users_on_email` (`email`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci[0m
+  [1m[35m (15.1ms)[0m  [1m[35mALTER TABLE `damage_details` ADD CONSTRAINT `fk_rails_fe62e8cd73`
+FOREIGN KEY (`drug_id`)
+  REFERENCES `drugs` (`id`)
+[0m
+  [1m[35m (20.6ms)[0m  [1m[35mALTER TABLE `deliveries` ADD CONSTRAINT `fk_rails_de15c80c9c`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (18.5ms)[0m  [1m[35mALTER TABLE `drugs` ADD CONSTRAINT `fk_rails_2fccd3105d`
+FOREIGN KEY (`delivery_id`)
+  REFERENCES `deliveries` (`id`)
+[0m
+  [1m[35m (15.0ms)[0m  [1m[35mALTER TABLE `trackable_deliveries` ADD CONSTRAINT `fk_rails_0abea26159`
+FOREIGN KEY (`delivery_id`)
+  REFERENCES `deliveries` (`id`)
+[0m
+  [1m[35m (14.6ms)[0m  [1m[35mALTER TABLE `trackable_deliveries` ADD CONSTRAINT `fk_rails_62a01e7f29`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (13.2ms)[0m  [1m[35mALTER TABLE `user_sessions` ADD CONSTRAINT `fk_rails_9fa262d742`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20210927161823)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20210924133314),
+(20210924134236),
+(20210927135002),
+(20210927135510),
+(20210927135610),
+(20210927161625);
+
+[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2021-09-27 16:23:30.756840', '2021-09-27 16:23:30.756840')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', '5956494b4883118bfe3a77b36bc41981971177b3', '2021-09-27 16:23:30.760128', '2021-09-27 16:23:30.760128')[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Joline', 'Ankunding', 'xiomara_pouros@runte.org', '$2a$04$gy31uuxIhA1g47M2bdtzTeDVNJafEBdCHucZE3iNQ8A4KsVotMKP2', '2021-09-27 16:23:31.073815', '2021-09-27 16:23:31.073815')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-27 19:23:31 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"xiomara_pouros@runte.org", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'xiomara_pouros@runte.org' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserSession Create (0.3ms)[0m  [1m[32mINSERT INTO `user_sessions` (`uuid`, `user_id`, `created_at`, `updated_at`) VALUES ('e25011d4-edd1-4255-b01e-593d14f248b1', 1, '2021-09-27 16:23:31.113175', '2021-09-27 16:23:31.113175')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 23ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 11052)
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Tiffiny', 'Kiehn', 'ernest@hauck-kertzmann.net', '$2a$04$MWE1SFeuaEOl2/1oWrMwBO3MAPJXDTgEO2B3WOXhXebapMSKXT5eK', '2021-09-27 16:23:31.126030', '2021-09-27 16:23:31.126030')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/sign_in" for 127.0.0.1 at 2021-09-27 19:23:31 +0300
+Processing by Api::V1::AuthController#create as HTML
+  Parameters: {"email"=>"ernest@hauck-kertzmann.net", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'ernest@hauck-kertzmann.net' LIMIT 1[0m
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 413)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-27 19:23:31 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Daren", "last_name"=>"Hansen", "email"=>"weldon_grady@stehr.com", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Daren', 'Hansen', 'weldon_grady@stehr.com', '$2a$04$1JizfUIHlrxPx10I6tIwwePuLWHY1OMnXATaLgdcOWGeNGY3Pp0se', '2021-09-27 16:23:31.160197', '2021-09-27 16:23:31.160197')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 201 Created in 5ms (ActiveRecord: 0.5ms | Allocations: 1787)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Catalina', 'Heller', 'jayme@fadel.name', '$2a$04$6/VPD9WAw/3/QNZ7Jt4nDe5K60ep4Q0TvnNebN1cmvqRMgjdPE4Ca', '2021-09-27 16:23:31.166427', '2021-09-27 16:23:31.166427')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-27 19:23:31 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Sung", "last_name"=>"Windler", "email"=>"jayme@fadel.name", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Sung', 'Windler', 'jayme@fadel.name', '$2a$04$QmgUgpJZvPx8sSE0Rh8rEeUNVNkOw19ryS73AlabKawTWTxCAE08S', '2021-09-27 16:23:31.181586', '2021-09-27 16:23:31.181586')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 848)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`first_name`, `last_name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('Etta', 'Gerlach', 'randell_schaden@gulgowski.io', '$2a$04$/3VVy9qfAESHRmpKP8nhZeQFKlhSaksvBPL9Ri0brUyoQDoRiVHBW', '2021-09-27 16:23:31.187931', '2021-09-27 16:23:31.187931')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/api/v1/users" for 127.0.0.1 at 2021-09-27 19:23:31 +0300
+Processing by Api::V1::UsersController#create as HTML
+  Parameters: {"first_name"=>"Damon", "last_name"=>"McLaughlin", "email"=>"", "password"=>"[FILTERED]"}
+Completed 422 Unprocessable Entity in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 172)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m

@@ -1,0 +1,4 @@
+en:
+  admins:
+    access:
+      denied: "Accessable only for admins"

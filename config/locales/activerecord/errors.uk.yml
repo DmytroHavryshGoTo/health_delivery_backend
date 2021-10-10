@@ -1,0 +1,20 @@
+uk:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "Укажіть ім'я"
+              too_short: "Ім'я занадто коротке"
+            last_name:
+              blank: 'Укажіть прізвище'
+              too_short: 'Прізвище занадто коротке'
+            email:
+              blank: 'Укажіть пошту'
+            password:
+              blank: 'Укажіть пароль'
+        user_session:
+          attributes:
+            uuid:
+              blank: 'Відсутній uuid'

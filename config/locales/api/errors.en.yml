@@ -1,0 +1,6 @@
+en:
+  api:
+    errors:
+      not_found: 'Record not found'
+      not_unique: 'Recoed already exists'
+      missing_parameters: 'There are missing params'
