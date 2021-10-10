@@ -19,13 +19,16 @@ module Api
 
       def update
         delivery = Delivery.find(params[:id])
+        delivery.update(delivery_status: params[:status].to_sym)
         route = delivery.route
+        return if city.blank?
+
         route.each do |station|
           station[:passed] = true if station[:current]
           station[:current] = true if station[:name] == city['city']
         end
 
-        delivery.update(delivery_status: params[:status].to_sym, lat: params[:lat], lon: params[:lon], route: route)
+        delivery.update(lat: params[:lat], lon: params[:lon], route: route)
       end
 
       def create  
@@ -78,7 +81,7 @@ module Api
             :estimated_delivery_date,
             route: [:name]
           ],
-          drugs: %i[name container_id max_humidity min_humidity max_temperature min_temperature]
+          drugs: %i[name quantity container_id max_humidity min_humidity max_temperature min_temperature]
         )
       end
     end
