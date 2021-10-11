@@ -26,13 +26,18 @@ module Deliveries
     end
 
     def create_delivery
+      
       @parcel = ::Delivery.new({
         user_id: user_id,
         estimated_delivery_date: Date.parse(delivery.estimated_delivery_date),
-        route: delivery.route,
+        route: optimized_route,
         name: delivery.name
       })      
       fail!(parcel.errors) unless parcel.save!
+    end
+
+    def optimized_route
+      ::Deliveries::CalculateRouteService.call(delivery.route).optimized_route
     end
 
     def create_drugs
