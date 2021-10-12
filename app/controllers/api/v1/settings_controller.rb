@@ -3,7 +3,7 @@
 module Api
   module V1
     class SettingsController < AdminsController
-      skip_before_action :check_admin_access
+      before_action :check_admin_access
 
       def dumps
         render json: ::DumpSerializer.new(Dump.all.order(id: :desc)).serializable_hash.to_json
