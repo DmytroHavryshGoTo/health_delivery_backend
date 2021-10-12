@@ -16,6 +16,10 @@ module Api
       def restore_dump
         ::Dumps::RestoreService.call(id: params[:id])
       end
+
+      def update_ssl
+        ::Ssl::UpdateService.call
+      end
     end
   end
 end

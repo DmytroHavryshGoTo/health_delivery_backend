@@ -11,7 +11,7 @@ module Dumps
 
       filename = "#{Time.now.strftime('%Y%m%d%H%M%S')}_#{@database}.sql"
       path = "#{Rails.root}/public/uploads/backups/#{filename}"
-      cmd = "mysqldump -u #{@username} #{@database} --ignore-table=#{@database}.dumps > #{path}"
+      cmd = "mysqldump -u #{@username} #{@database} --ignore-table=#{@database}.dumps --ignore-table=#{@database}.user_sessions > #{path}"
       puts cmd
       _output = %x( #{cmd} )
 

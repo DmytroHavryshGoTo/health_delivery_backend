@@ -15,9 +15,12 @@ Rails.application.routes.draw do
       end
 
       resource :settings, only: [] do
-        get :dumps, on: :collection
-        post :create_dump, on: :collection
-        post :restore_dump, on: :collection
+        collection do
+          get :dumps
+          post :create_dump
+          post :restore_dump
+          put :update_ssl
+        end
       end
     end
   end
