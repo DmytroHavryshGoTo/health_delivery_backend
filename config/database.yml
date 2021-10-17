@@ -13,8 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USERNAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
+  username: <%= ENV.fetch("DB_USERNAME") { '' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { '' } %>
   socket: /tmp/mysql.sock
 
 development:
@@ -26,4 +26,5 @@ test:
   database: health_delivery_backend_test
 
 production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
