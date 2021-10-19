@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+require 'net/http'
+
 module Deliveries
   class CalculateRouteService
     prepend BasicService
