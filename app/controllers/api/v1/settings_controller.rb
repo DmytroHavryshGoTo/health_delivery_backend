@@ -6,7 +6,7 @@ module Api
       before_action :check_admin_access
 
       def dumps
-        render json: ::DumpSerializer.new(Dump.all.order(id: :desc)).serializable_hash.to_json
+        render json: ::DumpSerializer.new(Dump.all.order(id: :desc), params: { locale: user_locale }).serializable_hash.to_json
       end
 
       def create_dump

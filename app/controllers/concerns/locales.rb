@@ -7,7 +7,7 @@ module Locales
     before_action :set_locale
   end
 
-  private
+  protected
 
   def set_locale
     I18n.locale = user_locale

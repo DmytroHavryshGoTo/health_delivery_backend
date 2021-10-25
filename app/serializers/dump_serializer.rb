@@ -10,7 +10,8 @@ class DumpSerializer
     object.user&.full_name || '(Deleted)' 
   end
 
-  attribute :created_at do |object|
-    object.created_at.strftime('%d/%m/%Y - %k:%M')
+  attribute :created_at do |object, params|
+    pattern = params[:locale] == 'en' ? '%m-%d-%Y - %l %p' : '%d-%m-%Y - %k:%M'
+    object.created_at.strftime(pattern)
   end
 end

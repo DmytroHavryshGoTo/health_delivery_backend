@@ -9,12 +9,12 @@ module Api
         deliveries = current_user.deliveries.order(id: :desc) 
         deliveries = deliveries.limit(params[:limit].to_i) if params[:pagy].present?
         deliveries = deliveries.where(delivery_status: params[:status]) if params[:status].present?
-        render json: ::DeliverySerializer.new(deliveries, include: [:drugs]).serializable_hash.to_json
+        render json: ::DeliverySerializer.new(deliveries, include: [:drugs], params: { locale: user_locale }).serializable_hash.to_json
       end
 
       def show
         delivery = current_user.deliveries.find(params[:id])
-        render json: ::DeliverySerializer.new(delivery, include: [:drugs]).serializable_hash.to_json
+        render json: ::DeliverySerializer.new(delivery, include: [:drugs], params: { locale: user_locale }).serializable_hash.to_json
       end
 
       def destroy
@@ -65,7 +65,7 @@ module Api
         delivery = Delivery.find_by(ttn: params[:ttn])
         raise ActiveRecord::RecordNotFound if delivery.blank?
 
-        render json: ::DeliverySerializer.new(delivery, include: [:drugs]).serializable_hash.to_json
+        render json: ::DeliverySerializer.new(delivery, include: [:drugs], params: { locale: user_locale }).serializable_hash.to_json
       end
 
       private

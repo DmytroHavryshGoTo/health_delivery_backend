@@ -11,11 +11,13 @@ class DeliverySerializer
     object.delivery_status
   end
 
-  attribute :created_at do |object|
-    object.created_at.strftime('%F')
+  attribute :created_at do |object, params|
+    pattern = params[:locale] == 'en' ? '%m-%d-%Y' : '%d-%m-%Y'
+    object.created_at.strftime(pattern)
   end
 
-  attribute :estimated_delivery_date do |object|
-    object.estimated_delivery_date.strftime('%F')
+  attribute :estimated_delivery_date do |object, params|
+    pattern = params[:locale] == 'en' ? '%m-%d-%Y' : '%d-%m-%Y'
+    object.estimated_delivery_date.strftime(pattern)
   end
 end
