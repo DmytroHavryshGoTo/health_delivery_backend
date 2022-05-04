@@ -5,7 +5,7 @@ class SendgridMailer
   SUBJECT = 'Delivery updated'
 
   def self.send_notification(to, name, current_station, current_status)
-    I18n.locale = :uk
+    # I18n.locale = :uk
     subject = I18n.t(:subject, scope: 'mailer.notifications.delivery_update')
     content = SendGrid::Content.new(
       type: 'text/plain',

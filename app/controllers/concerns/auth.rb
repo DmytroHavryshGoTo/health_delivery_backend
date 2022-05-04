@@ -11,6 +11,12 @@ module Auth
     before_action :auth_user
   end
 
+  protected
+
+  def iot_auth
+    error_response("unauthorized", :unauthorized) if request.headers['Authorization'] != ENV['IOT_SECRET']
+  end
+
   private
 
   def auth_user

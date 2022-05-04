@@ -4,6 +4,7 @@ module Api
   module V1
     class DeliveriesController < ApplicationController
       skip_before_action :auth_user, only: %i[update damage]
+      before_action :iot_auth, only: %i[update damage]
 
       def index
         deliveries = current_user.deliveries.order(id: :desc) 
@@ -30,7 +31,7 @@ module Api
 
         route.each do |station|
           station[:passed] = true if station[:current]
-          station[:current] = true if station[:name] == city['city']
+          station[:current] = station[:name] == city['city'] ? true : nil
         end
 
         delivery.update(lat: params[:lat], lon: params[:lon], route: route)
@@ -50,8 +51,9 @@ module Api
       def damage
         delivery = Delivery.find(params[:id])
         drug = delivery.drugs.find_by(container_id: params[:container_id])
-        return if city.blank?
+        return if city.blank? || drug.blank?
 
+        drug.update(status: params[:status].to_sym)
         route = delivery.route
         route.each do |st|
           if st[:name] == city['city']
