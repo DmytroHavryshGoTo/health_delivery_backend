@@ -24,7 +24,7 @@ module Api
         result = ::Users::CreateService.call(*user_params)
 
         if result.success?
-          head :created
+          render json: ::UserSerializer.new(result.user).serializable_hash.to_json
         else
           error_response(result.user, :unprocessable_entity)
         end
