@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         get :search, on: :collection
       end
 
+      resources :ads, only: %i[index create show update]
+
       resource :settings, only: [] do
         collection do
           get :dumps

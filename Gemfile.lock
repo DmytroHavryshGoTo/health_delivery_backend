@@ -209,6 +209,9 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.11.0)
+    ruby_http_client (3.5.5)
+    sendgrid-ruby (6.6.2)
+      ruby_http_client (~> 3.4)
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -249,6 +252,7 @@ DEPENDENCIES
   rspec-rails (~> 5.0.0)
   rubocop
   rubocop-rails
+  sendgrid-ruby
   spring
   tzinfo-data
 

@@ -1,0 +1,6 @@
+en:
+  mailer:
+    notifications:
+      delivery_update:
+        subject: "Delivery status update"
+        value: "Your delivery \"%{name}\" has been updated.\nCurrent station: %{station}, status: %{status}"

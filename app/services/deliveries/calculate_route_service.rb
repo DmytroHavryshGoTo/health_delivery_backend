@@ -1,7 +1,5 @@
 # frozen_string_literal: false
 
-require 'net/http'
-
 module Deliveries
   class CalculateRouteService
     prepend BasicService
@@ -30,7 +28,7 @@ module Deliveries
       https = Net::HTTP.new(url.host, url.port)
       https.use_ssl = true
       request = Net::HTTP::Get.new(url)
-
+      
       @optimized_order = JSON.parse(https.request(request).body)['routes'][0]['waypoint_order']
     end
 

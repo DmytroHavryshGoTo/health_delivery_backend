@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :trackable_deliveries, dependent: :destroy
   has_many :deliveries, through: :trackable_deliveries, source: :delivery
   has_many :dumps, dependent: :nullify
+  has_many :ads, dependent: :destroy
 
   validates :first_name, :last_name, :email, presence: true
   validates :first_name, :last_name, length: { minimum: 3 }

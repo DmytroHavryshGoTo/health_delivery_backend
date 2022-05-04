@@ -37,7 +37,7 @@ module Api
       private
 
       def user_params
-        params.require(%i[first_name last_name email password])
+        params.require(%i[first_name last_name email phone_number password need_help])
       end
 
       def update_params

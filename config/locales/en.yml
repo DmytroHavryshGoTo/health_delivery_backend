@@ -2,3 +2,5 @@ en:
   admins:
     access:
       denied: "Accessable only for admins"
+  users:
+    wrong_type: "Wrong acccount type for this action"

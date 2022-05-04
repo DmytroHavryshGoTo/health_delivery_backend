@@ -1,0 +1,6 @@
+uk:
+  mailer:
+    notifications:
+      delivery_update:
+        subject: "Оновлення статусу відправленя"
+        value: "Ваше відправлення %{name} було оновлено.\n Поточний пункт: %{station}, статус: %{status}"

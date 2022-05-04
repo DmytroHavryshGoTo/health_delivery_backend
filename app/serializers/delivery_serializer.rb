@@ -6,6 +6,7 @@ class DeliverySerializer
   set_key_transform :camel_lower
   attributes :id, :user_id, :route, :ttn, :name, :lat, :lon
   has_many :drugs
+  belongs_to :ad
 
   attribute :status do |object|
     object.delivery_status

@@ -12,12 +12,15 @@ module Deliveries
 
     option :drugs
     option :user_id
+    option :ad_id, optional: true
 
     attr_reader :parcel
     attr_reader :user
+    attr_reader :ad
 
     def call
       @user = User.find(user_id)
+      @ad = Ad.find_by(id: ad_id)
       ActiveRecord::Base.transaction do
         create_delivery
         create_drugs
@@ -25,10 +28,12 @@ module Deliveries
       end
     end
 
-    def create_delivery
-      
+    private
+
+    def create_delivery      
       @parcel = ::Delivery.new({
         user_id: user_id,
+        ad_id: (ad.present? && ad.delivery.blank?) ? ad_id : nil,
         estimated_delivery_date: Date.parse(delivery.estimated_delivery_date),
         route: optimized_route,
         name: delivery.name
@@ -47,6 +52,9 @@ module Deliveries
     end
 
     def track_delivery
+      if ad.present? && ad.delivery.blank?
+        ad.user.trackable_deliveries.create!(delivery_id: parcel.id)
+      end
       user.trackable_deliveries.create!(delivery_id: parcel.id)
     end
   end

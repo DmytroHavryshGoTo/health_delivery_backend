@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_11_064634) do
+ActiveRecord::Schema.define(version: 2022_05_01_134236) do
+
+  create_table "ads", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address", null: false
+    t.string "description", null: false
+    t.boolean "completed", default: false, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_ads_on_user_id"
+  end
 
   create_table "deliveries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -20,10 +31,11 @@ ActiveRecord::Schema.define(version: 2021_10_11_064634) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "lat", precision: 10
-    t.decimal "lon", precision: 10
+    t.float "lat"
+    t.float "lon"
     t.integer "delivery_status", default: 0
-    t.integer "covid_number", default: 0
+    t.bigint "ad_id"
+    t.index ["ad_id"], name: "index_deliveries_on_ad_id"
     t.index ["ttn"], name: "index_deliveries_on_ttn"
     t.index ["user_id"], name: "index_deliveries_on_user_id"
   end
@@ -77,6 +89,8 @@ ActiveRecord::Schema.define(version: 2021_10_11_064634) do
     t.boolean "admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "need_help", default: false, null: false
+    t.string "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
